@@ -19,7 +19,7 @@ test:
   timeout: 5000
 
 production:
-  adapter: postgresql
+  adapter: mysql2
   encoding: unicode
   database: megacorp
   pool: 5
