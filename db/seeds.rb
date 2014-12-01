@@ -1,8 +1,8 @@
 # Seed data.
 users = User.create([
   {
-    :userid => 'djberg96', :email => 'djberg96@gmail.com',
-    :first_name => 'Daniel', :last_name => 'Berger', :password => 'asdfasdf', :admin => true
+    :userid => 'poysama', :email => 'meeplelicious@gmail.com',
+    :first_name => 'Jan', :last_name => 'Mendoza', :password => 'menmen1', :admin => true
   },
   {
     :userid => 'test', :email => 'test@bar.com',
