@@ -1,0 +1,31 @@
+<div class="block">
+  <div class="secondary-navigation">
+    <ul class="wat-cf">
+      <li class="first active"><%= link_to "#{t("web-app-theme.list", :default => "List")}", tournaments_path  %></li>
+      <li><%= link_to "#{t("web-app-theme.new", :default => "New")}", new_tournament_path %></li>
+    </ul>
+  </div>          
+  <div class="content">          
+    <h2 class="title"><%= t("web-app-theme.all", :default => "All")  %> Tournaments</h2>
+    <div class="inner">
+      <table class="table">
+        <tr>             
+          <th>Name</th>
+          <th>Players</th>
+          <th>Rounds</th>
+          <th>Winner</th>
+        </tr>
+        <% @tournaments.each do |tournament| -%>
+        <tr class="<%= cycle("odd", "even") %>" onclick="window.location.href = '<%= tournament_path(tournament) %>'">
+          <td><%= tournament.name %></td>
+          <td><%= tournament.num_players %></td>
+          <td><%= tournament.num_rounds %></td>
+          <td><%= tournament.winner %></td>
+        </tr>          
+        <% end -%>
+      </table>
+    </div>
+  </div>
+</div>
+
+<% content_for :sidebar, render(:partial => 'sidebar') -%>

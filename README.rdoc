@@ -1,0 +1,37 @@
+== Netrunner Tracker
+
+http://netrunner-tracker.herokuapp.com
+
+Netrunner-Tracker is a web-application for tracking games of Android: Netrunner, the two-player "Living Card Game", published by Fantasy Flight Games. This is a two-player "Living Card Game" that pits one player as a Runner against another player as a Corporation.
+
+http://www.boardgamegeek.com/boardgame/124742/android-netrunner
+
+Within the website you can track individual games, and matches - a set of two games, 1 as the Corporation, 1 as the Runner. In addition, you'll be able to track your game statistics. You can see how many games you played, your win percentage, and even a breakdown of your statistics by faction, including your average score.
+
+In the case of matches, the application will automatically tally your match points and prestige points to tell you who won the match.
+
+You can also create your own A:NR league. A league is simply a group of players that regularly gather for games of A:NR. You can give a league any name you want, and associate games or matches with that league. This lets you view games that are only associated with that league to see how you're doing compared to your friends.
+
+There is partial tournament support as well (see the TODO list). This means that you can associate your matches with a tournament. Tournaments can also be associated with a league.
+
+== TODO
+
+There are many items on the TODO list, but keep in mind that this is a hobby project, and is driven largely by my time and your demand. So, I make no guarantees as to delivery dates.
+
+- Complete Tournament support. Automatically calculate a tournament winner.
+
+- Roles. Right now there is only "admin" and "everyone else". Add roles for admin, tournament judge, league judge, guest and regular users.
+
+- User preferences. Allow the user some ability to set preferences as far as layout/theme and privacy.
+
+- Add a deck builder and allow players to associate a deck with a game or match.
+
+- Add greater detail (probably using some xhtml) on the Stats page, so players can view a breakdown by individual identity.
+
+== Want to Contribute?
+
+I welcome patches! Just fork the project and send your pull request with a note explaining what it is.
+
+I also welcome contributions. Please consider tipping me at https://www.gittip.com. My userid is "djberg96".
+
+Enjoy!

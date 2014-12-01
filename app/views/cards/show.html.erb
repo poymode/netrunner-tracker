@@ -1,0 +1,53 @@
+<div class="block">
+  <div class="secondary-navigation">
+    <ul class="wat-cf">
+      <li class="first"><%= link_to "#{t("web-app-theme.list", :default => "List")}", cards_path  %></li>
+      <% if current_user.admin? %>
+        <li><%= link_to "#{t("web-app-theme.new", :default => "New")}", new_card_path %></li>
+      <% end %>
+      <li class="active"><%= link_to "#{t("web-app-theme.show", :default => "Show")}", card_path %></li>
+    </ul>
+  </div>          
+  <div class="content">
+    <div class="inner">
+      
+        <p>
+          <b><%= t("activerecord.attributes.card.title", :default => t("activerecord.labels.title", :default => "Title")) %>:</b>
+          <%= @card.title %>
+        </p>
+
+        <p>
+          <b><%= t("activerecord.attributes.card.kind", :default => t("activerecord.labels.kind", :default => "Kind")) %>:</b>
+          <%= @card.kind %>
+        </p>
+
+        <p>
+          <b><%= t("activerecord.attributes.card.faction", :default => t("activerecord.labels.faction", :default => "Faction")) %>:</b>
+          <%= @card.faction %>
+        </p>
+
+        <p>
+          <b>Cost:</b>
+          <%= @card.cost %>
+        </p>
+
+        <p>
+          <% if @card.agenda? %>
+            <b>Agenda Points:</b>
+            <%= @card.agenda_points %>
+          <% else %>
+            <b>Influence:</b>
+            <%= @card.influence %>
+          <% end %>
+        </p>
+
+      <div class="wat-cf">
+        <% if current_user.admin? %>
+          <%= link_to image_tag("web-app-theme/icons/application_edit.png", :alt => "#{t("web-app-theme.edit", :default=> "Edit")}") + " " + t("web-app-theme.edit", :default=> "Edit"), edit_card_path(@card), :class => "button" %> 
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
+
+<% content_for :sidebar, render(:partial => 'sidebar') -%>

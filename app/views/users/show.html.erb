@@ -1,0 +1,64 @@
+<div class="block">
+  <div class="secondary-navigation">
+    <ul class="wat-cf">
+      <label class="date">Registered: <%= @user.created_at.strftime("%d-%b-%Y") %></label>
+      <li class="first"><%= link_to "List", users_path %></li>
+      <li class="active"><%= link_to "Show", user_path %></li>
+      <li class="second"><%= link_to "Games", user_games_path(@user) %></li>
+      <li class="third"><%= link_to "Stats", stats_user_path %></li>
+    </ul>
+  </div>          
+  <div class="content">
+    <div class="inner">
+      <table class="table">  
+        <tr>
+          <td><b>Userid:</b></td>
+          <td title="Name after slash (if present) is the player's OCTGN id"><%= @user.userid %>
+            <% if @user.octgnid %>
+              / <%= @user.octgnid %>
+            <% end %>
+          </td>
+          <td><b>Games Played</b></td>
+          <td><%= @user.total_games %></td>
+        <tr>
+          <td><b>Email:</b></td>
+          <td><%= mail_to @user.email, nil, :encode => :javascript %></td>
+          <td><b>Wins</b></td>
+          <td><%= @user.total_wins %></td>
+        </tr>
+        <tr>
+          <td><b><%= t("activerecord.attributes.user.first_name", :default => t("activerecord.labels.first_name", :default => "First name")) %>:</b></td>
+          <td><%= @user.first_name %></td>
+          <td><b>Losses</b></td>
+          <td><%= @user.total_losses %></td>
+        </tr>
+        <tr>
+          <td><b><%= t("activerecord.attributes.user.last_name", :default => t("activerecord.labels.last_name", :default => "Last name")) %>:</b></td>
+          <td><%= @user.last_name %></td>
+          <td><b>Wins as Runner</b></td>
+          <td><%= @user.total_wins_as_runner %></td>
+        </tr>
+        <tr>
+          <td><b><%= t("activerecord.attributes.user.admin", :default => t("activerecord.labels.admin", :default => "Admin")) %>:</b></td>
+          <td><%= @user.admin? ? 'Yes' : 'No' %></td>
+          <td><b>Wins as Corporation</b></td>
+          <td><%= @user.total_wins_as_corporation %></td>
+        </tr>
+        <tr>
+          <td><b>Comments:</b></td>
+          <td colspan=3><%= @user.comments %></td>
+        </tr>
+      </table>
+      <div class="wat-cf">
+        <% if current_user.admin? || current_user == @user %>
+          <%= link_to image_tag("web-app-theme/icons/application_edit.png", :alt => "#{t("web-app-theme.edit", :default=> "Edit")}") + " " + t("web-app-theme.edit", :default=> "Edit"), edit_user_path(@user), :class => "button" %>
+        <% end %>
+        <% if current_user.admin? && @user.total_games == 0 %>
+          <%= link_to image_tag("web-app-theme/icons/cross.png", :alt => "#{t("web-app-theme.delete", :default=> "Delete")}") + " " + t("web-app-theme.delete", :default => "Delete"), user_path(@user), :method => "delete", :class => "button", :confirm => "#{t("web-app-theme.confirm", :default => "Are you sure?")}" %>
+        <% end %>
+      </div>      
+    </div>
+  </div>
+</div>
+
+<% content_for :sidebar, render(:partial => 'sidebar') -%>

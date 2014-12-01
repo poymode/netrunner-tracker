@@ -1,0 +1,79 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
+ * or vendor/assets/stylesheets of plugins, if any, can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the top of the
+ * compiled file, but it's generally better to create a new file per style scope.
+ *
+ *= require_self
+ *= require_tree .
+ */
+
+.table tr.top{
+  border-top: 2px solid black; 
+}
+
+/* For sortable column headers */
+.table th.sortable{
+  font-size: 1.2em;
+}
+
+.table th.sortable a{
+  text-decoration: none;
+}
+
+.match legend {
+  font-weight: bold;
+  margin: 0 3%;
+}
+
+.table td.clickable:hover { 
+  background: Burlywood;
+  cursor: pointer;
+}
+
+.table tr.clickable:hover { 
+  background: Burlywood;
+  cursor: pointer;
+}
+
+ul label {
+  font-size: 1.2em;
+  text-align: right;
+  float: right;
+  position: relative;
+  display: inline-block;
+  vertical-align: middle;
+  margin-top: 0.5em;
+  margin-right: 1em;
+}
+
+#login_form {
+  position: relative;
+  float: left;
+  width: 52%;
+  padding-right: 2em;
+}
+
+#login_form legend {
+  margin: 0 3%;
+  font-weight: bold;
+}
+
+#login_form table {
+  padding: 0.5em;
+}
+
+#login_form #login_button {
+  padding-left: 0.5em;
+  padding-bottom: 0.5em;
+}
+
+#site_description {
+  float: right;
+  position: relative;
+  width: 40%;
+}

@@ -1,0 +1,22 @@
+<div class="block notice">
+  <% case params[:action] %>
+  <% when 'index' %>
+    <h3>Cards</h3>
+    <div class="content">
+      <p>A list of all currently available cards.</p>
+    </div>
+  <% when 'show' %>
+    <div class="content">
+      <p>Details about the selected card.</p>
+    </div>
+  <% end %>
+</div>
+<div class="block">
+  <h3>Links</h3>
+  <ul class="navigation">
+    <li><%= link_to 'Games', games_path %></li>
+    <li><%= link_to 'Players', users_path %></li>
+    <li><%= link_to 'Runners', runners_path %></li>
+    <li><%= link_to 'Corporations', corporations_path %></li>
+  </ul>
+</div>

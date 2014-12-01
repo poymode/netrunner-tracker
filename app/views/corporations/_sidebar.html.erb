@@ -1,0 +1,22 @@
+<div class="block notice">
+  <% case params[:action] %>
+  <% when 'show' %>
+    <h3>Corporation: <%= @corporation.faction %></h3>
+    <p>Details about the selected corporation.</p>
+  <% when 'index' %>
+    <h3>Corporations</h3>
+    <div class="content">
+      <p>Here you see a list of all the Netrunner Corporations along with their respective slogans.</p>
+    </div>
+  <% end %>
+</div>
+<div class="block">
+  <h3>Links</h3>
+  <ul class="navigation">
+    <li><%= link_to 'Runners', runners_path %></li>
+    <li><%= link_to 'Players', users_path %></li>
+    <li><%= link_to 'Games', games_path %></li>
+    <li><%= link_to 'Leagues', leagues_path %></li>
+    <li><%= link_to 'Cards', cards_path %></li>
+  </ul>
+</div>

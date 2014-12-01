@@ -1,0 +1,47 @@
+<div class="block">
+  <div class="secondary-navigation">
+    <ul class="wat-cf">
+      <li class="first"><%= link_to "#{t("web-app-theme.list", :default => "List")}", tournaments_path  %></li>
+      <li><%= link_to "#{t("web-app-theme.new", :default => "New Tournament")}", new_tournament_path %></li>
+      <li><%= link_to "New Match", new_match_path %></li>
+      <li class="active"><%= link_to "#{t("web-app-theme.show", :default => "Show")}", tournament_path %></li>
+    </ul>
+  </div>          
+  <div class="content">
+    <div class="inner">
+      
+      <table class="table">
+        <tr>
+          <td><b>Name:</b> <%= @tournament.name %></td>
+          <td><b>Created by:</b> <%= @tournament.created_by.userid %></td>
+        </tr>
+
+        <tr>
+          <td class="clickable" onclick="window.location.href = '<%= tournament_users_path(@tournament) %>'">
+            <b>Players:</b> <%= @tournament.num_players %>
+          </td>
+          <td><b>Rounds:</b> <%= @tournament.num_rounds %></td>
+        </tr>
+
+        <tr>
+          <td class="clickable" onclick="window.location.href = '<%= tournament_matches_path(@tournament) %>'">
+            <b>Matches:</b> <%= @tournament.matches.size %>
+          </td>
+          <td class="clickable"><b>Winner:</b> <%= @tournament.winner %></td>
+        </tr>
+      </table>
+
+      <% if @tournament.created_by == current_user %>
+      <div class="wat-cf">
+        <%= link_to image_tag("web-app-theme/icons/application_edit.png", :alt => "#{t("web-app-theme.edit", :default=> "Edit")}") + " " + t("web-app-theme.edit", :default=> "Edit"), edit_tournament_path(@tournament), :class => "button" %> 
+      <% end %>
+
+      <% if current_user.admin? %>
+        <%= link_to image_tag("web-app-theme/icons/cross.png", :alt => "#{t("web-app-theme.delete", :default=> "Delete")}") + " " + t("web-app-theme.delete", :default => "Delete"), tournament_path(@tournament), :method => "delete", :class => "button", :confirm => "#{t("web-app-theme.confirm", :default => "Are you sure?")}" %>
+      <% end %>
+      </div>      
+    </div>
+  </div>
+</div>
+
+<% content_for :sidebar, render(:partial => 'sidebar') -%>

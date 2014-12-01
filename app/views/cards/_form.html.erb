@@ -1,0 +1,71 @@
+<table class="table">
+  <tr>
+    <div class="group">
+      <td><%= f.label :title, :class => :label %></td>
+      <td colspan=3>
+        <span class="description">Ex. Access to Globalsec</span>
+        <%= f.text_field :title, :class => :text_field %>
+      </td>
+    </div>
+  </tr>
+
+  <tr>
+    <div class="group">
+      <td><%= f.label :type, :class => :label %></td>
+      <td><%= f.select :kind, Card::TYPES %></td>
+      <td><%= f.label :influence, :class => :label %></td>
+      <td><%= f.select :influence, 0..4 %></td>
+    </div>
+  </tr>
+
+  <tr>
+    <div class="group">
+      <td><%= f.label :faction, :class => :label %></td>
+      <td><%= f.select :faction, Card::FACTIONS %></td>
+      <td><%= f.label :cost, :class => :label %></td>
+      <td><%= f.select :cost, 0..15 %></td>
+    </div>
+  </tr>
+
+  <tr>
+    <div class="group">
+      <td><%= f.label :subtype, :class => :label %></td>
+      <td><%= f.text_field :subtype, :class => :text_field %></td>
+      <td><%= f.label :agenda_points, :class => :label %></td>
+      <td><%= f.select :agenda_points, 1..3, :include_blank => true, :default => nil %></td>
+    </div>
+  </tr>
+
+  <tr>
+    <div class="group">
+      <td><%= f.label :strength, :class => :label %></td>
+      <td><%= f.select :strength, (0..9).to_a << 'X', :include_blank => true, :default => nil %></td>
+      <td><%= f.label :subroutines, :class => :label %></td>
+      <td><%= f.select :num_subs, (1..4).to_a << 'X', :include_blank => true, :default => nil %></td>
+    </div>
+  </tr>
+
+  <tr>
+    <div class="group">
+      <td><%= f.label :tag, :class => :label %></td>
+      <td><%= f.select :tag, [true, false], :include_blank => true, :default => nil %></td>
+      <td><%= f.label :advance, :class => :label %></td>
+      <td><%= f.select :advance, [true, false], :include_blank => true, :default => nil %></td>
+    </div>
+  </tr>
+
+  <tr>
+    <div class="group">
+      <td><%= f.label :text, :class => :label %></td>
+      <td colspan=4><%= f.text_area :text, :class => :text_area, :rows => 5 %></td>
+    </div>
+  </tr>
+</table>
+        
+<div class="group navform wat-cf">
+  <button class="button" type="submit">
+    <%= image_tag("web-app-theme/icons/tick.png", :alt => "#{t("web-app-theme.save", :default => "Save")}") %> <%= t("web-app-theme.save", :default => "Save") %>
+  </button>
+  <span class="text_button_padding"><%= t("web-app-theme.or", :default => "or") %></span>
+	<%= link_to t("web-app-theme.cancel", :default => "Cancel"), cards_path, :class => "text_button_padding link_button" %>
+</div>

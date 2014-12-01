@@ -1,0 +1,26 @@
+<div class="block notice">
+  <% case params[:action] %>
+  <% when 'index' %>
+    <h3>Tournaments</h3>
+    <div class="content">
+      <p>A list of all tournaments.</p>
+      <p>Click on a row for details about that tournament.</p>
+    </div>
+  <% when 'show' %>
+    <h3><%= @tournament.name %></h3>
+    <div class="content">
+      <p>Details about the selected tournament.</p>
+    </div>
+  <% end %>
+</div>
+<div class="block">
+  <h3>Links</h3>
+  <ul class="navigation">
+    <% if params[:action] == 'show' %>
+      <li><%= link_to 'Tournament Matches', tournament_matches_path(@tournament) %></li>
+    <% end %>
+    <li><%= link_to 'All Matches', matches_path %></li>
+    <li><%= link_to 'Games', games_path %></li>
+    <li><%= link_to 'Players', users_path %></li>
+  </ul>
+</div>

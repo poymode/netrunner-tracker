@@ -1,0 +1,29 @@
+<div class="block notice">
+  <% case params[:action] %>
+  <% when 'new' %>
+    <h3>New Match</h3>
+    <div class="content">
+      <p>Create a new match.</p>
+      <p>Match points and prestige points will be tallied automatically.</p>
+    </div>
+  <% when 'show' %>
+    <h3>Match Winner: <%= @match.match_winner %></h3>
+    <div class="content">
+      <p>Details about the individual match.</p>
+    </div>
+  <% when 'index' %>
+    <h3>Netrunner Matches</h3>
+    <div class="content">
+      <p>A list of all matches. Click on a row to see details.</p>
+    </div>
+  <% end %>
+</div>
+<div class="block">
+  <h3>Links</h3>
+  <ul class="navigation">
+    <li><%= link_to 'Games', games_path %></li>
+    <li><%= link_to 'Players', users_path %></li>
+    <li><%= link_to 'Tournaments', tournaments_path %></li>
+    <li><%= link_to 'Leagues', leagues_path %></li>
+  </ul>
+</div>

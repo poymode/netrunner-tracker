@@ -1,0 +1,99 @@
+<div class="block">
+  <div class="secondary-navigation">
+    <ul class="wat-cf">
+      <label class="date"><%= @match.date.strftime("%d-%b-%Y") %></label>
+      <li class="first"><%= link_to "#{t("web-app-theme.list", :default => "List")}", matches_path  %></li>
+      <li><%= link_to "#{t("web-app-theme.new", :default => "New")}", new_match_path %></li>
+      <li class="active"><%= link_to "#{t("web-app-theme.show", :default => "Show")}", match_path %></li>
+      <li><%= link_to "#{t("web-app-theme.show", :default => "Match Players")}", match_users_path(@match) %></li>
+      <li><%= link_to "#{t("web-app-theme.show", :default => "Match Games")}", match_games_path(@match) %></li>
+    </ul>
+  </div>          
+  <div class="content">
+    <div class="inner">
+      <table class="table">      
+        <% if @match.tournament || @match.league %>
+          <tr>
+            <% if @match.tournament %>
+              <td class="clickable" onclick="window.location.href = '<%= tournaments_path(@tournament) %>'">
+                Tournament: <%= @match.tournament.name %>, Round <%= @match.round %>
+              </td>
+            <% end %>
+            <% if @match.league %>
+              <td>League: <%= @match.league.name %></td>
+              <% unless @match.name.blank? %>
+                <td>Name: <%= @match.name %></td>
+              <% end %>
+            <% end %>
+          </tr>
+        <% end %>
+        <tr>
+          <td class="clickable" onclick="window.location.href = '<%= user_path(@match.player1) %>'">
+            Player 1: <%= @match.player1.userid %>
+          </td>
+          <td>Match Points: <%= @match.player1_match_points %></td>
+          <td>Prestige: <%= @match.player1_prestige_points %></td>
+        </tr>
+        <tr>
+          <td class="clickable" onclick="window.location.href = '<%= user_path(@match.player2) %>'">
+            Player 2: <%= @match.player2.userid %>
+          </td>
+          <td>Match Points: <%= @match.player2_match_points %></td>
+          <td>Prestige: <%= @match.player2_prestige_points %></td>
+        </tr>
+        <tr>
+          <td>Comments:</td>
+        </tr>
+        <tr>
+          <td colspan=3><%= @match.comment %></td>
+        </tr>
+      </table>
+
+      <p></p>
+      <hr></hr>
+      <p></p>
+
+      <table class="table" >
+        <caption>Match Details</caption>
+        <tr>
+          <th></th>
+          <th>Winner</th>
+          <th>Score</th>
+          <th>Faction</th>
+          <th>Loser</th>
+          <th>Score</th>
+          <th>Faction</th>
+        </tr>
+        <tr class="clickable" onclick="window.location.href = '<%= game_path(@match.games.first) %>'">
+          <td><b>GAME 1</b></td>
+          <td><%= @match.games.first.player_winner %></td>
+          <td><%= @match.games.first.player_winner_score %></td>
+          <td><%= @match.games.first.faction_winner %></td>
+          <td><%= @match.games.first.player_loser %></td>
+          <td><%= @match.games.first.player_loser_score %></td>
+          <td><%= @match.games.first.faction_loser %></td>
+        </tr>
+        <tr class="clickable" onclick="window.location.href = '<%= game_path(@match.games.last) %>'">
+          <td><b>GAME 2</b></td>
+          <td><%= @match.games.last.player_winner %></td>
+          <td><%= @match.games.last.player_winner_score %></td>
+          <td><%= @match.games.last.faction_winner %></td>
+          <td><%= @match.games.last.player_loser %></td>
+          <td><%= @match.games.last.player_loser_score %></td>
+          <td><%= @match.games.last.faction_loser %></td>
+        </tr>
+      </table>
+
+      <p></p>
+
+      <% if current_user.admin? %>
+        <div class="wat-cf">
+          <%= link_to image_tag("web-app-theme/icons/application_edit.png", :alt => "#{t("web-app-theme.edit", :default=> "Edit")}") + " " + t("web-app-theme.edit", :default=> "Edit"), edit_match_path(@match), :class => "button" %> 
+          <%= link_to image_tag("web-app-theme/icons/cross.png", :alt => "#{t("web-app-theme.delete", :default=> "Delete")}") + " " + t("web-app-theme.delete", :default => "Delete"), match_path(@match), :method => "delete", :class => "button", :confirm => "#{t("web-app-theme.confirm", :default => "Are you sure?")}" %>
+        </div>      
+      <% end %>
+    </div>
+  </div>
+</div>
+
+<% content_for :sidebar, render(:partial => 'sidebar') -%>

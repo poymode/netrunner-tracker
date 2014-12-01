@@ -1,0 +1,101 @@
+<div class="block">
+  <div class="secondary-navigation">
+    <ul class="wat-cf">
+      <li class="first"><%= link_to "List", users_path %></li>
+      <li class="first"><%= link_to "Show", user_path %></li>
+      <li class="active"><%= link_to "Stats", stats_user_path %></li>
+    </ul>
+  </div>          
+  <div class="content">
+    <div class="inner">
+      <p></p>
+      <table class="table" title="Stats">
+        <tr>
+          <th>Faction</th>
+          <th>Total</th>
+          <th>Wins</th>
+          <th>Losses</th>
+          <th>Average Score</th>
+        </tr>
+        <tr class="clickable"
+          onclick="window.location.href = '<%= hb_user_games_path(@user) %>'"
+          title="View games as Haas-Bioroid"
+        >
+          <td>Haas-Bioroid</td>
+          <td><%= @user.total_games_as_haas_bioroid %></td>
+          <td><%= @user.total_wins_as_haas_bioroid %></td>
+          <td><%= @user.total_losses_as_haas_bioroid %></td>
+          <td><%= @user.average_score_as_haas_bioroid.round(1) %></td>
+        </tr>
+        <tr class="clickable"
+          onclick="window.location.href = '<%= jinteki_user_games_path(@user) %>'"
+          title="View games as Jinteki"
+        >
+          <td>Jinteki</td>
+          <td><%= @user.total_games_as_jinteki %></td>
+          <td><%= @user.total_wins_as_jinteki %></td>
+          <td><%= @user.total_losses_as_jinteki %></td>
+          <td><%= @user.average_score_as_jinteki.round(1) %></td>
+        </tr>
+        <tr class="clickable"
+          onclick="window.location.href = '<%= nbn_user_games_path(@user) %>'"
+          title="View games as NBN"
+        >
+          <td>NBN</td>
+          <td><%= @user.total_games_as_nbn %></td>
+          <td><%= @user.total_wins_as_nbn %></td>
+          <td><%= @user.total_losses_as_nbn %></td>
+          <td><%= @user.average_score_as_nbn.round(1) %></td>
+        </tr>
+        <tr class="clickable"
+          onclick="window.location.href = '<%= weyland_user_games_path(@user) %>'"
+          title="View games as Weyland Consortium" 
+        >
+          <td>Weyland Consortium</td>
+          <td><%= @user.total_games_as_weyland %></td>
+          <td><%= @user.total_wins_as_weyland %></td>
+          <td><%= @user.total_losses_as_weyland %></td>
+          <td><%= @user.average_score_as_weyland.round(1) %></td>
+        </tr>
+        <tr class="clickable"
+          onclick="window.location.href = '<%= anarch_user_games_path(@user) %>'"
+          title="View games as Anarch"
+        >
+          <td>Anarch</td>
+          <td><%= @user.total_games_as_anarch %></td>
+          <td><%= @user.total_wins_as_anarch %></td>
+          <td><%= @user.total_losses_as_anarch %></td>
+          <td><%= @user.average_score_as_anarch.round(1) %></td>
+        </tr>
+        <tr class="clickable"
+          onclick="window.location.href = '<%= criminal_user_games_path(@user) %>'"
+          title="View games as Criminal"
+        >
+          <td>Criminal</td>
+          <td><%= @user.total_games_as_criminal %></td>
+          <td><%= @user.total_wins_as_criminal %></td>
+          <td><%= @user.total_losses_as_criminal %></td>
+          <td><%= @user.average_score_as_criminal.round(1) %></td>
+        </tr>
+        <tr class="clickable"
+          onclick="window.location.href = '<%= shaper_user_games_path(@user) %>'"
+          title="View games as Shaper"
+        >
+          <td>Shaper</td>
+          <td><%= @user.total_games_as_shaper %></td>
+          <td><%= @user.total_wins_as_shaper %></td>
+          <td><%= @user.total_losses_as_shaper %></td>
+          <td><%= @user.average_score_as_shaper.round(1) %></td>
+        </tr>
+        <tr class="top">
+          <td><b>SUMMARY</b></td>
+          <td><b><%= @user.total_games %></b></td>
+          <td><b><%= @user.total_wins %></b></td>
+          <td><b><%= @user.total_losses %></b></td>
+          <td><b><%= @user.overall_average_score.round(1) %></b></td>
+      </table>
+    </div>
+  </div>
+</div>
+
+<% content_for :sidebar, render(:partial => 'sidebar') -%>

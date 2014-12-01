@@ -1,0 +1,91 @@
+<div class="block">
+<div class="content">
+<div class="inner">
+
+<% title = "Please use 'OCTGN' or 'Guest' if your opponent is not registered." %>
+
+<table class="table">
+  <tr>
+    <td>
+      <%= f.label :league_id, t("activerecord.attributes.game.league", :default => "League (optional)"), :class => :label %>
+      <%= f.collection_select(:league_id, League.all, :id, :name, {:include_blank => true}) %>
+    </td>
+
+    <td>
+      <%= f.label :date, t("activerecord.attributes.game.date", :default => "Date"), :class => :label %>
+      <%= f.date_select :date, :class => 'date_select' %>
+    </td>
+    <td></td>
+    <td>
+        <%= f.label :unfinished, t("activerecord.attributes.game.unfinished", :default => "Unfinished?"), :class => :label %>
+        <%= f.check_box :unfinished %>
+    </td>
+  </tr>
+
+  <tr>
+    <td>
+      <%= f.label :runner_user_id, "Runner Player", :class => :label, :title => title %>
+      <%= f.collection_select(:runner_user_id, User.order("lower(userid)"), :id, :userid,
+          {:selected => @game.runner_user ? @game.runner_user.id : current_user.id}) %>
+    </td>
+
+    <td>
+      <%= f.label :runner_id, t("activerecord.attributes.game.runner", :default => "Runner Faction"), :class => :label %>
+      <%= f.collection_select(:runner_id, @runners, :id, :faction_and_name) %>
+    </td>
+
+    <td>
+      <%= f.label :scores do %>
+        <%= f.label :runner_score, "Runner AP", :class => :label, :title => runner_agenda_tooltip %>
+        <%= f.select(:runner_score, 0..15) %>
+      <% end %>
+    </td>
+
+    <td>
+        <%= f.label :flatlined, t("activerecord.attributes.game.flatlined", :default => "Flatlined?"), :class => :label %>
+        <%= f.check_box :flatlined %>
+    </td>
+  </tr>
+
+  <tr>
+    <td>
+      <%= f.label :corporation_user_id, "Corp Player", :class => :label, :title => title %>
+      <%= f.collection_select(:corporation_user_id, User.order("lower(userid)"), :id, :userid, {
+        :selected => @game.corporation_user ? @game.corporation_user.id : current_user.id}) %>
+    </td>
+
+    <td>
+      <%= f.label :corporation_id, t("activerecord.attributes.game.corporation", :default => "Corporation Faction"), :class => :label %>
+      <%= f.collection_select(:corporation_id, @corporations, :id, :faction_and_slogan) %>
+    </td>
+
+    <td>
+      <%= f.label :scores do %>
+        <%= f.label :corporation_score, "Corp AP", :class => :label, :title => corp_agenda_tooltip %>
+        <%= f.select(:corporation_score, 0..15) %>
+      <% end %>
+    </td>
+    <td>
+        <%= f.label :draw_death, t("activerecord.attributes.game.flatlined", :default => "Draw Death?"), :class => :label %>
+        <%= f.check_box :draw_death %>
+    </td>
+  </tr>
+
+  <tr>
+    <td colspan=4>
+      <%= f.label :comment, t("activerecord.attributes.game.comment", :default => "Comment"), :class => :label %>
+      <%= f.text_area :comment, :class => 'text_area', :rows => 4 %>
+    </td>
+  </tr>
+</table>
+</div>
+        
+<div class="group navform wat-cf">
+  <button class="button" type="submit">
+    <%= image_tag("web-app-theme/icons/tick.png", :alt => "#{t("web-app-theme.save", :default => "Save")}") %> <%= t("web-app-theme.save", :default => "Save") %>
+  </button>
+  <span class="text_button_padding"><%= t("web-app-theme.or", :default => "or") %></span>
+	<%= link_to t("web-app-theme.cancel", :default => "Cancel"), games_path, :class => "text_button_padding link_button" %>
+</div>
+</div>
+</div>

@@ -1,0 +1,92 @@
+  <table class="table">
+    <tr>
+      <% if League.count > 0 %>
+        <td><%= f.label :league_id, "League", :class => :label %></td>
+        <td><%= f.collection_select(:league_id, League.order(:name), :id, :name, :include_blank => true) %></td>
+      <% end %>
+
+      <% if Tournament.count > 0 %>
+        <td><%= f.label :tournament_id, "Tournament", :class => :label %></td>
+        <td><%= f.collection_select(:tournament_id, Tournament.order(:name), :id, :name, :include_blank => true) %></td>
+        <td><%= f.label :round, :class => :label %></td>
+        <td><%= f.select :round, 1..8, :include_blank => true, :selected => nil %></td>
+      <% end %>
+    </tr>
+    <tr>
+      <td><%= f.label :name, :class => :label %></td>
+      <td><%= f.text_field :name, :class => 'text_field' %></td>
+      <td><%= f.label :date, :class => :label %></td>
+      <td colspan=3><%= f.date_select :date, :class => 'date_select' %></td>
+    </tr>
+  </table>
+
+  <%= field_set_tag "Game 1", :class => "match" do %>
+    <%= fields_for :game1 do |game1| %>
+      <table class="table">
+        <tr>
+          <td><%= game1.label :runner %></td>
+          <td><%= game1.collection_select(:runner_user_id, @users, :id, :userid, {:selected => current_user.id}) %></td>
+          <td><%= game1.label :runner, "Faction" %></td>
+          <td><%= game1.collection_select(:runner_id, @runners, :id, :faction_and_name) %></td>
+          <td><%= game1.label :runner_score, "AP", :title => runner_agenda_tooltip %></td>
+          <td><%= game1.select(:runner_score, 0..15) %></td>
+          <td><%= game1.label :flatlined, "Flatlined?" %></td>
+          <td><%= game1.check_box :flatlined %></td>
+        <tr>
+          <td><%= game1.label :corporation, "Corp" %></td>
+          <td><%= game1.collection_select(:corporation_user_id, @users, :id, :userid) %></td>
+          <td><%= game1.label :corporation, "Faction" %></td>
+          <td><%= game1.collection_select(:corporation_id, @corporations, :id, :short_faction_and_slogan) %></td>
+          <td><%= game1.label :corporation_score, "AP", :title => corp_agenda_tooltip %></td>
+          <td><%= game1.select(:corporation_score, 0..15) %></td>
+          <td><%= game1.label :draw_death, "Draw Death?" %></td>
+          <td><%= game1.check_box :draw_death %></td>
+        </tr>
+      </table>
+    <% end %>
+  <% end %>
+  <p></p>
+  <%= field_set_tag "Game 2", :class => "match" do %>
+    <%= fields_for :game2 do |game1| %>
+      <table class="table">
+        <tr>
+          <td><%= game1.label :runner %></td>
+          <td><%= game1.collection_select(:runner_user_id, @users, :id, :userid) %></td>
+          <td><%= game1.label :runner, "Faction" %></td>
+          <td><%= game1.collection_select(:runner_id, @runners, :id, :faction_and_name) %></td>
+          <td><%= game1.label :runner_score, "AP", :title => runner_agenda_tooltip %></td>
+          <td><%= game1.select(:runner_score, 0..15) %></td>
+          <td><%= game1.label :flatlined, "Flatlined?" %></td>
+          <td><%= game1.check_box :flatlined %></td>
+        <tr>
+          <td><%= game1.label :corporation, "Corp" %></td>
+          <td><%= game1.collection_select(:corporation_user_id, @users, :id, :userid, {:selected => current_user.id}) %></td>
+          <td><%= game1.label :corporation, "Faction" %></td>
+          <td><%= game1.collection_select(:corporation_id, @corporations, :id, :short_faction_and_slogan) %></td>
+          <td><%= game1.label :corporation_score, "AP", :title => corp_agenda_tooltip %></td>
+          <td><%= game1.select(:corporation_score, 0..15) %></td>
+          <td><%= game1.label :draw_death, "Draw Death?" %></td>
+          <td><%= game1.check_box :draw_death %></td>
+        </tr>
+      </table>
+    <% end %>
+  <% end %>
+
+  <p></p>
+
+  <table class="table">
+    <tr>
+      <td><%= f.label :comment, "Comments" %></td>
+      <td colspan=3><%= f.text_area :comment, :class => :text_area, :rows => 4  %></td>
+    </tr>
+  </table>
+
+  <p></p>
+        
+<div class="group navform wat-cf">
+  <button class="button" type="submit">
+    <%= image_tag("web-app-theme/icons/tick.png", :alt => "#{t("web-app-theme.save", :default => "Save")}") %> <%= t("web-app-theme.save", :default => "Save") %>
+  </button>
+  <span class="text_button_padding"><%= t("web-app-theme.or", :default => "or") %></span>
+	<%= link_to t("web-app-theme.cancel", :default => "Cancel"), matches_path, :class => "text_button_padding link_button" %>
+</div>
